@@ -52,7 +52,7 @@ jobs:
       uses: alexjurkiewicz/ecr-scan-image@v1.5.0
       with:
         repository: $ECR_REGISTRY/$ECR_REPOSITORY
-        tag: ${{ steps.docker-build.outputs.tag }}
+        tag: $IMAGE_TAG
         
     - name: Send mail
       if: always()
