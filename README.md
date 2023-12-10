@@ -2,24 +2,24 @@
 
 
 ## 1. GitHub Repository Setup:
-
 	1. I initialized a GitHub public repository with a sample python application that prints "Hello, World!" to the console.
 	2. Included a docker file for the above sample application.
+
 ## 2. Docker Image Creation:
 
     For running my simple python application, I configured my Dockerfile in such a way that it will be lightweight and builds very quickly. Below foctors are the reasons my docker image is light in weight.
 
-    a. **Base Image**:
+    a. Base Image:
         I used Alpine as base image. Alpine Linux is known for its lightweight nature, making it a good choice for minimizing the size of the final Docker image. 
-    b. **Number of layers**:
+    b. Number of layers:
         The size of a Docker image is the sum of it’s layers. Since there are minimal number of layers, the resulting image size will also be small
-    c. **Dependencies**:
+    c. Dependencies:
         The number and size of dependencies and libraries required by your application contribute to the image size. This is also one factor as my application has no dependencies.
 
 ## 3. AWS ECR Setup:
 
 ### 1. Create an AWS ECR repository to store Docker images.
-    **a. Create Access keys**:
+    a. Create Access keys:
         1. Navigate to AWS Console, and sign in with your AWS account.
         2. click on root user in navigation bar
         3. click on Security Credentials.
@@ -27,25 +27,22 @@
         5. Click on the "Create access key" button.
         **NOTE**: it's essential to handle root user credentials with extreme care due to their elevated privileges.
 
-    **b. Confiuration for aws cli**:
+    b. Confiuration for aws cli:
         1. Execute `aws configure` command for setting access key id, access key secret, region and output format.
 
-    **c. Authenticate to your default registry:** To authenticate Docker to an Amazon ECR registry with get-login-password, run the aws ecr `get-login-password` command.
-        ```python
-        aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com
-        ```
+    c. Authenticate to your default registry: To authenticate Docker to an Amazon ECR registry with get-login-password, run the aws ecr `get-login-password` command.
+        "aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.<region>.amazonaws.com"
 
-    **d. Create repocitory:** Create a ecr image repo using below command
-        ```python
+
+    d. Create repocitory: Create a ecr image repo using below command
         aws ecr create-repository \
         --repository-name <reponame> \
         --region <region>
-        ```
+
 ### 2. Configure necessary IAM roles and policies for access management:
     As I created access keys as a root user, I did not had to create IAM roles and Policies, and this not a recommended also. But below I documented how we can create a policy and attach it to a role.
 
-    ecr-policy.json
-    ```JSON
+    ecr-policy.json:
         {
             "Version":"2012-10-17",
             {
@@ -59,7 +56,7 @@
                 },
                 "Action":[
                         "ecr:BatchCheckLayerAvailability",
-                        "ecr:GetDownloadUrlForLayer",
+             :           "ecr:GetDownloadUrlForLayer",
                         "ecr:GetRepositoryPolicy",
                         "ecr:DescribeRepositories",
                         "ecr:ListImages",
@@ -73,9 +70,8 @@
                 "Resource":"arn:aws:ecr:<region>:<account-id>:repository/<repocitory-name>"
             }
         }
-    ```
-    trust-policy.json
-    ```JSON
+
+    trust-policy.json:
         {
             "Version": "2012-10-17",
             "Statement": [
@@ -88,7 +84,7 @@
                 }
             ]
         }
-    ```
+
     Explanation:
         1. Create an IAM policy for ECR access.
         2. Create an IAM role with a trust policy for EC2 instances.
@@ -114,3 +110,4 @@
 ## Bonus Tasks:
     1. Included a step in workflow to scan the image for vulnerabilities by using `alexjurkiewicz/ecr-scan-image@v1.5.0` action 
     2. As a last step in the workflow, I included email notification, which uses `dawidd6/action-send-mail@v2` action. The email will be triggered always. The email body will contain the job status and also number of vulnerabilities found in Image scan Step.
+
