@@ -51,7 +51,7 @@ jobs:
       id: docker-scan
       uses: alexjurkiewicz/ecr-scan-image@v1.5.0
       with:
-        repository: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.IMAGE_REPO_NAME }}
+        repository: ${{ secrets.IMAGE_REPO_NAME }}
         tag: latest
         
     - name: Send mail
