@@ -104,17 +104,3 @@
 ## Security and Best Practices:
     I used GitHub secrets feature for storing Sensitive data like Access Keys and ECR repocitory details.
 
-## Documentation:
-    Provided the README.md file which explains the setup and how the workflow functions. Also included the prerequisites needed to replicate the setup.
-
-## Bonus Tasks:
-    1. Included a step in workflow to scan the image for vulnerabilities by using `alexjurkiewicz/ecr-scan-image@v1.5.0` action 
-    2. As a last step in the workflow, I included email notification, which uses `dawidd6/action-send-mail@v2` action. The email will be triggered always. The email body will contain the job status and also number of vulnerabilities found in Image scan Step.
-
-## Screenshots:
-    1. All Workflows:
-        ![workflows](https://github.com/babu10103/MapUpDevOpsProject/assets/64721017/b53b1800-dfdf-4071-914e-05b5a3b163f2)
-    2. Build:
-    	![build](https://github.com/babu10103/MapUpDevOpsProject/assets/64721017/075a819e-43af-40c6-9f6d-13952ef2ee01)
-    3. Email Notification:
-    	![Screenshot 2023-12-10 102628](https://github.com/babu10103/MapUpDevOpsProject/assets/64721017/8864bb7d-fa03-4ed7-a546-363879e0f7b9)
