@@ -1,4 +1,4 @@
-name: MapUp_WF 
+name: aws-ecr-github-actions-workflow
 
 on:
   push:
