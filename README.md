@@ -1,16 +1,13 @@
-# MapUpDevOpsProject
-
-
 ## 1. GitHub Repository Setup:
-	1. I initialized a GitHub public repository with a sample python application that prints "Hello, World!" to the console.
+	1. Initialize a GitHub public repository with a sample python application that prints "Hello, World!" to the console.
 	2. Included a docker file for the above sample application.
 
 ## 2. Docker Image Creation:
 
-    For running my simple python application, I configured my Dockerfile in such a way that it will be lightweight and builds very quickly. Below foctors are the reasons my docker image is light in weight.
+    For running my simple python application,vconfigured my Dockerfile in such a way that it will be lightweight and builds very quickly. Below foctors are the reasons my docker image is light in weight.
 
     a. Base Image:
-        I used Alpine as base image. Alpine Linux is known for its lightweight nature, making it a good choice for minimizing the size of the final Docker image. 
+        Use Alpine as base image. Alpine Linux is known for its lightweight nature, making it a good choice for minimizing the size of the final Docker image. 
     b. Number of layers:
         The size of a Docker image is the sum of it’s layers. Since there are minimal number of layers, the resulting image size will also be small
     c. Dependencies:
@@ -40,7 +37,7 @@
     ECR registry link: 910802444738.dkr.ecr.ap-south-1.amazonaws.com/babumapupdevopsproject
 
 ### 2. Configure necessary IAM roles and policies for access management:
-    As I created access keys as a root user, I did not had to create IAM roles and Policies, and this not a recommended also. But below I documented how we can create a policy and attach it to a role.
+    As I created access keys as a root user, I did not had to create IAM roles and Policies, and this is not recommended also. However, below I documented how we can create a policy and attach it to a role.
 
     ecr-policy.json:
         {
@@ -102,5 +99,5 @@
     The workflow uses environment variables for AWS ECR details and secrets for AWS credentials.
 
 ## Security and Best Practices:
-    I used GitHub secrets feature for storing Sensitive data like Access Keys and ECR repocitory details.
+    Use GitHub secrets feature for storing Sensitive data like Access Keys and ECR repocitory details.
 
